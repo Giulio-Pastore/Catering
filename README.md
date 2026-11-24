@@ -29,7 +29,13 @@ Secrets richiesti:
 | `CLOUDFLARE_PROJECT_NAME` | Nome Worker (override di `wrangler.jsonc` prima del deploy) |
 | `ADMIN_TOKEN` | Password admin (`Authorization: Bearer` + gate UI) |
 
-Il workflow `deploy.yml` esegue `patch-wrangler-name`, build, `wrangler secret put ADMIN_TOKEN` e `wrangler deploy`. Il primo deploy crea lo Worker e espone `*.workers.dev` (`workers_dev: true`).
+Il workflow [`deploy.yml`](./.github/workflows/deploy.yml) parte **solo a mano** (GitHub → Actions → *Deploy Cloudflare Worker* → *Run workflow*).
+
+Passi: `patch-wrangler-name` → build → `wrangler secret put ADMIN_TOKEN` → `wrangler deploy`. Il primo deploy crea lo Worker e espone `*.workers.dev` (`workers_dev: true`).
+
+### Permessi token Cloudflare
+
+Template consigliato: **Edit Cloudflare Workers**, limitato al **tuo account**. Per questa v1 **non serve D1** né Cloudflare Pages.
 
 ## Architettura dati
 
