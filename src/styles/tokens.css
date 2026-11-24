@@ -1,0 +1,28 @@
+:root {
+  --cream: #f7f3ed;
+  --paper: #fffdf9;
+  --ink: #2c2825;
+  --terracotta: #c45c3e;
+  --terracotta-soft: #e8a090;
+  --olive: #5c6b4a;
+  --olive-muted: #8a9a78;
+  --line: rgba(44, 40, 37, 0.14);
+
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --radius-soft: 6px;
+
+  color: var(--ink);
+  background: var(--cream);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  font-size: 1.05rem;
+  text-rendering: optimizeLegibility;
+}

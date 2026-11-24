@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(196, 92, 62, 0.08), transparent 38%),
+  radial-gradient(circle at 88% 0%, rgba(92, 107, 74, 0.1), transparent 32%),
+    var(--cream);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.editorial-lead {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--olive);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.6rem;
+  background: var(--terracotta);
+  color: var(--paper);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.btn-primary:hover {
+  background: #b34e32;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.75rem 1.2rem;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.surface {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-soft);
+}
+
+.texture-blob {
+  background:
+    linear-gradient(125deg, rgba(196, 92, 62, 0.18), transparent 55%),
+    linear-gradient(315deg, rgba(92, 107, 74, 0.22), transparent 50%),
+    var(--paper);
+}

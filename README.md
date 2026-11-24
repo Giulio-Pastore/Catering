@@ -1,0 +1,40 @@
+# Convivio · Catering
+
+Web app React + Vite per prenotare un servizio di catering, con API mock in-memory su Cloudflare Worker (Static Assets + SPA).
+
+## Sviluppo locale
+
+```bash
+npm install
+cp .dev.vars.example .dev.vars
+npm run dev
+```
+
+Imposta `ADMIN_TOKEN` in `.dev.vars` (stesso valore usato nel form `/admin`).
+
+## Script
+
+- `npm run dev` — Vite + Worker locale (`@cloudflare/vite-plugin`)
+- `npm run build` — typecheck + build `dist/`
+- `npm run deploy` — build + `wrangler deploy`
+
+## GitHub Actions
+
+Secrets richiesti:
+
+| Secret | Uso |
+|--------|-----|
+| `CLOUDFLARE_ACCOUNT_ID` | Account Cloudflare |
+| `CLOUDFLARE_API_TOKEN` | Deploy Worker (template **Edit Cloudflare Workers**, scope account) |
+| `CLOUDFLARE_PROJECT_NAME` | Nome Worker (override di `wrangler.jsonc` prima del deploy) |
+| `ADMIN_TOKEN` | Password admin (`Authorization: Bearer` + gate UI) |
+
+Il workflow `deploy.yml` esegue `patch-wrangler-name`, build, `wrangler secret put ADMIN_TOKEN` e `wrangler deploy`. Il primo deploy crea lo Worker e espone `*.workers.dev` (`workers_dev: true`).
+
+## Architettura dati
+
+- Frontend → `src/lib/api-client.ts` → `/api/*`
+- Worker → `worker/repositories/memory-catering-repository.ts` (in-memory, seed iniziale)
+- Interfaccia `CateringRepository` pronta per D1 / Supabase
+
+Vedi [`PLAN.md`](./PLAN.md) per il piano funzionale completo.
