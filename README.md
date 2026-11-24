@@ -26,12 +26,12 @@ Secrets richiesti:
 |--------|-----|
 | `CLOUDFLARE_ACCOUNT_ID` | Account Cloudflare |
 | `CLOUDFLARE_API_TOKEN` | Deploy Worker (template **Edit Cloudflare Workers**, scope account) |
-| `CLOUDFLARE_PROJECT_NAME` | Nome Worker (override di `wrangler.jsonc` prima del deploy) |
+| `CLOUDFLARE_PROJECT_NAME` | Nome Worker (es. `convivio-catering` o `catering`). In CI viene **normalizzato** in minuscolo con trattini (`Catering` → `catering`); caratteri non validi bloccano il build |
 | `ADMIN_TOKEN` | Password admin (`Authorization: Bearer` + gate UI) |
 
 Il workflow [`deploy.yml`](./.github/workflows/deploy.yml) parte **solo a mano** (GitHub → Actions → *Deploy Cloudflare Worker* → *Run workflow*).
 
-Passi: `patch-wrangler-name` → build → `wrangler secret put ADMIN_TOKEN` → `wrangler deploy`. Il primo deploy crea lo Worker e espone `*.workers.dev` (`workers_dev: true`).
+Passi: `patch-wrangler-name` → build → individua `dist/*/wrangler.json` (il nome cartella segue `CLOUDFLARE_PROJECT_NAME`, non è sempre `convivio_catering`) → `wrangler secret put ADMIN_TOKEN` → `wrangler deploy`.
 
 ### Permessi token Cloudflare
 

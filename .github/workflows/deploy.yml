@@ -26,6 +26,12 @@ jobs:
           fi
           node scripts/patch-wrangler-name.mjs "$CLOUDFLARE_PROJECT_NAME"
       - run: npm run build
+      - name: Risolvi config Wrangler generata dal build
+        id: wrangler
+        run: |
+          CONFIG=$(node scripts/resolve-wrangler-config.mjs --relative)
+          echo "config=$CONFIG" >> "$GITHUB_OUTPUT"
+          echo "Uso config: $CONFIG"
       - name: Deploy Worker + assets
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -36,5 +42,6 @@ jobs:
             echo "ADMIN_TOKEN è obbligatorio per /admin" >&2
             exit 1
           fi
-          printf '%s' "$ADMIN_TOKEN" | npx wrangler secret put ADMIN_TOKEN --config dist/convivio_catering/wrangler.json
-          npx wrangler deploy --config dist/convivio_catering/wrangler.json
+          CONFIG="${{ steps.wrangler.outputs.config }}"
+          printf '%s' "$ADMIN_TOKEN" | npx wrangler secret put ADMIN_TOKEN --config "$CONFIG"
+          npx wrangler deploy --config "$CONFIG"
